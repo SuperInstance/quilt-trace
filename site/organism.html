@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Production Cell — Quilt Organism</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --panel: #131820;
+    --border: #1f2733;
+    --text: #c5cdd9;
+    --muted: #6c7a8c;
+    --accept: #4ade80;
+    --drift: #fbbf24;
+    --refuse: #f87171;
+    --accent: #818cf8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    margin: 0; padding: 24px; line-height: 1.5;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px;
+  }
+  h1 { margin: 0; font-size: 28px; font-weight: 500; color: var(--accent); }
+  .chain-head { font-family: monospace; font-size: 13px; color: var(--muted); }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px; margin-bottom: 20px;
+  }
+  .panel h2 { margin: 0 0 16px 0; font-size: 14px; font-weight: 500;
+              color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .stat { text-align: center; }
+  .stat-value { font-size: 32px; font-weight: 600; }
+  .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; }
+  .bar { display: flex; align-items: center; margin: 6px 0; font-size: 13px; }
+  .bar-label { width: 130px; font-family: monospace; }
+  .bar-track { flex: 1; height: 18px; background: var(--bg); border-radius: 2px;
+                overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+  .bar-fill.accept { background: var(--accept); }
+  .bar-fill.drift { background: var(--drift); }
+  .bar-fill.refuse { background: var(--refuse); }
+  .bar-value { width: 50px; text-align: right; font-family: monospace; color: var(--muted); }
+  .graph { height: 480px; background: var(--bg); border-radius: 4px; position: relative; }
+  .graph svg { width: 100%; height: 100%; }
+  .legend { display: flex; gap: 16px; margin-top: 12px; font-size: 12px;
+            color: var(--muted); justify-content: center; }
+  .legend-dot { display: inline-block; width: 10px; height: 10px;
+                 border-radius: 50%; vertical-align: middle; margin-right: 4px; }
+  .intact { color: var(--accept); }
+  .broken { color: var(--refuse); }
+  footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+            color: var(--muted); font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🌱 The Production Cell — Quilt Organism</h1>
+    <div class="chain-head">chain head: 67ab1e16e6dd7ba3...</div>
+  </header>
+
+  <div class="panel">
+    <h2>Overview</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">20</div>
+        <div class="stat-label">receipts</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">12</div>
+        <div class="stat-label">cells</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">5</div>
+        <div class="stat-label">substrates</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value intact">intact</div>
+        <div class="stat-label">chain</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Polarity</h2>
+    <div class="bar"><div class="bar-label">ACCEPT</div><div class="bar-track"><div class="bar-fill accept" style="width: 100.0%"></div></div><div class="bar-value">14</div></div>
+<div class="bar"><div class="bar-label">DRIFT</div><div class="bar-track"><div class="bar-fill drift" style="width: 28.6%"></div></div><div class="bar-value">4</div></div>
+<div class="bar"><div class="bar-label">REFUSE</div><div class="bar-track"><div class="bar-fill refuse" style="width: 14.3%"></div></div><div class="bar-value">2</div></div>
+  </div>
+
+  <div class="panel">
+    <h2>Substrates</h2>
+    <div class="bar"><div class="bar-label">cuopt-routing</div><div class="bar-track"><div class="bar-fill" style="width: 12.5%"></div></div><div class="bar-value">1</div></div>
+<div class="bar"><div class="bar-label">cuopt-lp</div><div class="bar-track"><div class="bar-fill" style="width: 25.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">CanonScoreReceiver</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">8</div></div>
+<div class="bar"><div class="bar-label">VectorizeReceiver</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">8</div></div>
+<div class="bar"><div class="bar-label">quilt-trace</div><div class="bar-track"><div class="bar-fill" style="width: 12.5%"></div></div><div class="bar-value">1</div></div>
+  </div>
+
+  <div class="panel">
+    <h2>Top Cells</h2>
+    <div class="bar"><div class="bar-label">what-the-mooring-line-holds.md</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">unbound.md</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">the_datamodel_rift.md</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">the_135.md</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">the-tenders-sunday.md</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">the-night-shift-thinks-about-owls.md</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">the-job-that-wakes-at-933.md</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">the-last-bus-out-of-ordinary.md</div><div class="bar-track"><div class="bar-fill" style="width: 100.0%"></div></div><div class="bar-value">2</div></div>
+<div class="bar"><div class="bar-label">warehouse-cell</div><div class="bar-track"><div class="bar-fill" style="width: 50.0%"></div></div><div class="bar-value">1</div></div>
+<div class="bar"><div class="bar-label">production-cell</div><div class="bar-track"><div class="bar-fill" style="width: 50.0%"></div></div><div class="bar-value">1</div></div>
+  </div>
+
+  <div class="panel">
+    <h2>Witness Chain</h2>
+    <div class="graph" id="graph"></div>
+    <div class="legend">
+      <span><span class="legend-dot" style="background: var(--accept)"></span>ACCEPT</span>
+      <span><span class="legend-dot" style="background: var(--drift)"></span>DRIFT</span>
+      <span><span class="legend-dot" style="background: var(--refuse)"></span>REFUSE</span>
+    </div>
+  </div>
+
+  <footer>
+    quilt-trace v0.1.0 · the organism sees itself · 2026-09-24 08:45 UTC
+  </footer>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const data = {"nodes": [{"id": "8b26151d32d9be30", "polarity": "ACCEPT", "label": "warehouse-cell (cuopt-routin)"}, {"id": "547a2a6a7d1f81db", "polarity": "ACCEPT", "label": "production-cell (cuopt-lp)"}, {"id": "67ab1e16e6dd7ba3", "polarity": "ACCEPT", "label": "warehouse-decision-c (cuopt-lp)"}, {"id": "canon_00_what-the", "polarity": "ACCEPT", "label": "what-the-mooring-lin (CanonScoreRe)"}, {"id": "vec_00_what-the", "polarity": "ACCEPT", "label": "what-the-mooring-lin (VectorizeRec)"}, {"id": "canon_01_unbound.", "polarity": "DRIFT", "label": "unbound.md (CanonScoreRe)"}, {"id": "vec_01_unbound.", "polarity": "ACCEPT", "label": "unbound.md (VectorizeRec)"}, {"id": "canon_02_the_data", "polarity": "DRIFT", "label": "the_datamodel_rift.m (CanonScoreRe)"}, {"id": "vec_02_the_data", "polarity": "ACCEPT", "label": "the_datamodel_rift.m (VectorizeRec)"}, {"id": "canon_03_the_135.", "polarity": "REFUSE", "label": "the_135.md (CanonScoreRe)"}, {"id": "vec_03_the_135.", "polarity": "ACCEPT", "label": "the_135.md (VectorizeRec)"}, {"id": "canon_04_the-tend", "polarity": "DRIFT", "label": "the-tenders-sunday.m (CanonScoreRe)"}, {"id": "vec_04_the-tend", "polarity": "ACCEPT", "label": "the-tenders-sunday.m (VectorizeRec)"}, {"id": "canon_05_the-nigh", "polarity": "REFUSE", "label": "the-night-shift-thin (CanonScoreRe)"}, {"id": "vec_05_the-nigh", "polarity": "ACCEPT", "label": "the-night-shift-thin (VectorizeRec)"}, {"id": "canon_06_the-job-", "polarity": "ACCEPT", "label": "the-job-that-wakes-a (CanonScoreRe)"}, {"id": "vec_06_the-job-", "polarity": "ACCEPT", "label": "the-job-that-wakes-a (VectorizeRec)"}, {"id": "canon_07_the-last", "polarity": "DRIFT", "label": "the-last-bus-out-of- (CanonScoreRe)"}, {"id": "vec_07_the-last", "polarity": "ACCEPT", "label": "the-last-bus-out-of- (VectorizeRec)"}, {"id": "trace_root", "polarity": "ACCEPT", "label": "render (quilt-trace)"}], "links": [{"source": "8b26151d32d9be30", "target": "547a2a6a7d1f81db"}, {"source": "547a2a6a7d1f81db", "target": "67ab1e16e6dd7ba3"}, {"source": "canon_00_what-the", "target": "vec_00_what-the"}, {"source": "vec_00_what-the", "target": "canon_01_unbound."}, {"source": "canon_01_unbound.", "target": "vec_01_unbound."}, {"source": "vec_01_unbound.", "target": "canon_02_the_data"}, {"source": "canon_02_the_data", "target": "vec_02_the_data"}, {"source": "vec_02_the_data", "target": "canon_03_the_135."}, {"source": "canon_03_the_135.", "target": "vec_03_the_135."}, {"source": "vec_03_the_135.", "target": "canon_04_the-tend"}, {"source": "canon_04_the-tend", "target": "vec_04_the-tend"}, {"source": "vec_04_the-tend", "target": "canon_05_the-nigh"}, {"source": "canon_05_the-nigh", "target": "vec_05_the-nigh"}, {"source": "vec_05_the-nigh", "target": "canon_06_the-job-"}, {"source": "canon_06_the-job-", "target": "vec_06_the-job-"}, {"source": "vec_06_the-job-", "target": "canon_07_the-last"}, {"source": "canon_07_the-last", "target": "vec_07_the-last"}, {"source": "vec_07_the-last", "target": "trace_root"}]};
+const container = document.getElementById('graph');
+const width = container.clientWidth;
+const height = container.clientHeight;
+
+const svg = d3.select('#graph').append('svg')
+  .attr('viewBox', [0, 0, width, height]);
+
+const colorMap = {
+  ACCEPT: '#4ade80', DRIFT: '#fbbf24', REFUSE: '#f87171'
+};
+
+const link = svg.append('g')
+  .attr('stroke', '#3a4554')
+  .attr('stroke-opacity', 0.5)
+  .selectAll('line')
+  .data(data.links)
+  .join('line')
+  .attr('stroke-width', 1);
+
+const node = svg.append('g')
+  .selectAll('circle')
+  .data(data.nodes)
+  .join('circle')
+  .attr('r', 5)
+  .attr('fill', d => colorMap[d.polarity] || '#818cf8')
+  .attr('stroke', '#1f2733')
+  .attr('stroke-width', 1.5)
+  .call(d3.drag()
+    .on('start', (event, d) => {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x; d.fy = d.y;
+    })
+    .on('drag', (event, d) => {
+      d.fx = event.x; d.fy = event.y;
+    })
+    .on('end', (event, d) => {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null; d.fy = null;
+    }));
+
+node.append('title').text(d => d.label);
+
+const simulation = d3.forceSimulation(data.nodes)
+  .force('link', d3.forceLink(data.links).id(d => d.id).distance(40).strength(0.7))
+  .force('charge', d3.forceManyBody().strength(-80))
+  .force('center', d3.forceCenter(width / 2, height / 2))
+  .on('tick', () => {
+    link
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+  });
+</script>
+</body>
+</html>
